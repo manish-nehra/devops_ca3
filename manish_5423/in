@@ -1,0 +1,12 @@
+<?php
+$host = 'db';
+$user = 'manish';
+$password = 'root';
+$db = 'test_db';
+
+$conn = new mysql($host, $user, $password,$db);
+if($conn->connect_error){
+	echo 'connection failed' . $conn->connect_error;
+}
+echo 'Sucessfully connected to MYSQL'; 
+?>
