@@ -1,0 +1,41 @@
+version: "3"
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Manish
+    environment:
+      name: manish
+      regno: 11805423
+    volumes:
+      - ./manish_5423:/var/www/html/
+    ports:
+      - 8000:80
+    networks:
+      app_net:
+        ipv4_address: 11.80.54.20      
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: manish
+      MYSQL_DATABASE: blood_management-system
+    volumes:
+      - ./manish_1180:/docker-entrypoint-initdb.d
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+networks:
+  app_net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 11.80.54.23/24
+          gateway: 11.80.54.22
